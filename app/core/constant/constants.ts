@@ -5,6 +5,6 @@ export const FIREBASE_CONFIG = {
   projectId: "bugged-out-78a34",
   storageBucket: "bugged-out-78a34.appspot.com",
   messagingSenderId: "909444865428",
-  appId: "1:909444865428:web:dca719483624a8dc99c381",
-  measurementId: "G-WMLY0CRPPZ"
+  appId: "1:909444865428:web:7585ab56a86e793799c381",
+  measurementId: "G-1VYZGDVMJ6"
 };
