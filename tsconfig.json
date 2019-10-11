@@ -8,5 +8,11 @@
         "experimentalDecorators": true,
         "removeComments": false,
         "noImplicitAny": false
-    }
+    },
+    "include": [
+        "app/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
 }
