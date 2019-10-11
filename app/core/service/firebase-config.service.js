@@ -16,8 +16,7 @@ var FirebaseConfigService = (function () {
         this.configureApp();
     }
     FirebaseConfigService.prototype.configureApp = function () {
-        var app = firebase.initializeApp(constants_1.FIREBASE_CONFIG);
-        console.log(app); // TODO: REMOVE
+        firebase.initializeApp(constants_1.FIREBASE_CONFIG);
     };
     FirebaseConfigService = __decorate([
         core_1.Injectable(), 

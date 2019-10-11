@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FirebaseConfigService } from './core/service/firebase-config.service';
 
 @Component({
     selector: 'my-app',
@@ -16,7 +15,4 @@ import { FirebaseConfigService } from './core/service/firebase-config.service';
     `]
 })
 export class AppComponent {
-    constructor(private service: FirebaseConfigService ) {
-
-    }
 }

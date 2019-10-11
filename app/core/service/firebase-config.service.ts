@@ -10,7 +10,6 @@ export class FirebaseConfigService {
   }
 
   configureApp() {
-    const app = firebase.initializeApp(FIREBASE_CONFIG);
-    console.log(app); // TODO: REMOVE
+    firebase.initializeApp(FIREBASE_CONFIG);
   }
 }
