@@ -19,7 +19,10 @@ var BugService = (function () {
     BugService.prototype.getAddedBugs = function () {
         var _this = this;
         return Observable_1.Observable.create(function (obs) {
-            _this.bugsDbRef.on('child_added', function (bug) { return obs.next(bug.val()); }, function (err) { return obs.error(err); });
+            _this.bugsDbRef.on('child_added', function (bug) {
+                var newBug = bug.val();
+                obs.next(newBug);
+            }, function (err) { return obs.error(err); });
         });
     };
     BugService = __decorate([
