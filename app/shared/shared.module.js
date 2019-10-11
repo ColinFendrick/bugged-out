@@ -8,24 +8,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-// Modules
 var core_1 = require('@angular/core');
-var shared_module_1 = require('../shared/shared.module');
-// Component
-var bug_list_component_1 = require('./bug-list/bug-list.component');
-var BugModule = (function () {
-    function BugModule() {
+var common_1 = require('@angular/common');
+var SharedModule = (function () {
+    function SharedModule() {
     }
-    BugModule = __decorate([
+    SharedModule = __decorate([
         core_1.NgModule({
-            imports: [shared_module_1.SharedModule],
-            declarations: [bug_list_component_1.BugListComponent],
-            exports: [],
-            providers: []
+            imports: [common_1.CommonModule],
+            declarations: [],
+            exports: [common_1.CommonModule]
         }), 
         __metadata('design:paramtypes', [])
-    ], BugModule);
-    return BugModule;
+    ], SharedModule);
+    return SharedModule;
 }());
-exports.BugModule = BugModule;
-//# sourceMappingURL=bug.module.js.map
+exports.SharedModule = SharedModule;
+//# sourceMappingURL=shared.module.js.map
