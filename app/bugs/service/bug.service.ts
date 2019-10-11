@@ -7,7 +7,7 @@ import { FirebaseConfigService } from '../../core/service/firebase-config.servic
 export class BugService {
   private bugsDbRef = this.fire.database.ref('/bugs');
 
-  constructor(private fire: FirebaseConfigService) { }
+  constructor(private fire: FirebaseConfigService) {}
 
   getAddedBugs(): Observable<any> {
     return Observable.create(obs => {

@@ -6,11 +6,15 @@ import { FIREBASE_CONFIG } from '../constant/constants';
 
 @Injectable()
 export class FirebaseConfigService {
-  public database: firebase.database.Database;
+  private _database: firebase.database.Database;
 
   constructor() {
     this.configureApp();
     this.configureDatabase();
+  }
+
+  public get database() {
+    return this._database;
   }
 
   configureApp():void {
@@ -18,6 +22,6 @@ export class FirebaseConfigService {
   }
 
   configureDatabase():void {
-    this.database = firebase.database();
+    this._database = firebase.database();
   }
 }
