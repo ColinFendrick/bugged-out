@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { BugService } from '../service/bug.service';
 
 @Component({
   moduleId: module.id,
@@ -6,4 +7,17 @@ import { Component } from '@angular/core';
   templateUrl: 'bug-list.component.html',
   styleUrls: ['bug-list.component.css']
 })
-export class BugListComponent {}
+export class BugListComponent implements OnInit {
+  constructor(private bugService: BugService) {}
+
+  ngOnInit():void {
+    this.getAddedBugs();
+  }
+
+  getAddedBugs():void {
+    this.bugService.getAddedBugs()
+      .subscribe(
+        bug => console.log(bug), err => console.error('Unable to get added bug: ', err)
+      );
+  }
+}
