@@ -21,10 +21,7 @@ var BugListComponent = (function () {
     BugListComponent.prototype.getAddedBugs = function () {
         var _this = this;
         this.bugService.getAddedBugs()
-            .subscribe(function (bug) {
-            _this.bugs.push(bug);
-            console.log(_this.bugs); //TODO: Remove
-        }, function (err) { return console.error('Unable to get added bug: ', err); });
+            .subscribe(function (bug) { return _this.bugs.push(bug); }, function (err) { return console.error('Unable to get added bug: ', err); });
     };
     BugListComponent = __decorate([
         core_1.Component({

@@ -21,10 +21,7 @@ export class BugListComponent implements OnInit {
   getAddedBugs():void {
     this.bugService.getAddedBugs()
       .subscribe(
-        bug => {
-          this.bugs.push(bug);
-          console.log(this.bugs); //TODO: Remove
-        },
+        bug => this.bugs.push(bug),
         err => console.error('Unable to get added bug: ', err)
       );
   }
