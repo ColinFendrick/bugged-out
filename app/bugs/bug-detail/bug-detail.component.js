@@ -10,12 +10,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
+var bug_service_1 = require('../service/bug.service');
+var bug_1 = require('../model/bug');
 var forbidden_string_validator_1 = require('../../shared/validation/forbidden-string.validator');
 var constants_1 = require('../constants/constants');
 var BugDetailComponent = (function () {
-    function BugDetailComponent(formB) {
+    function BugDetailComponent(formB, bugService) {
         this.formB = formB;
+        this.bugService = bugService;
         this.modalId = "bugModal";
+        this.currentBug = new bug_1.Bug();
     }
     BugDetailComponent.prototype.ngOnInit = function () {
         this.configureForm();
@@ -29,8 +33,20 @@ var BugDetailComponent = (function () {
         });
     };
     BugDetailComponent.prototype.submitForm = function () {
-        console.log(this.bugForm); //TODO: REMOVE
+        this.addBug();
+        this.bugForm.reset({ status: 1, severity: 1 });
     };
+    BugDetailComponent.prototype.addBug = function () {
+        this.currentBug.title = this.bugForm.value['title'];
+        this.currentBug.status = this.bugForm.value['status'];
+        this.currentBug.severity = this.bugForm.value['severity'];
+        this.currentBug.description = this.bugForm.value['severity'];
+        this.bugService.addBug(this.currentBug);
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BugDetailComponent.prototype, "currentBug", void 0);
     BugDetailComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -38,7 +54,7 @@ var BugDetailComponent = (function () {
             templateUrl: 'bug-detail.component.html',
             styleUrls: ['bug-detail.component.css']
         }), 
-        __metadata('design:paramtypes', [forms_1.FormBuilder])
+        __metadata('design:paramtypes', [forms_1.FormBuilder, bug_service_1.BugService])
     ], BugDetailComponent);
     return BugDetailComponent;
 }());

@@ -25,6 +25,18 @@ var BugService = (function () {
             }, function (err) { return obs.error(err); });
         });
     };
+    BugService.prototype.addBug = function (_a) {
+        var title = _a.title, status = _a.status, severity = _a.severity, description = _a.description;
+        var newBugRef = this.bugsDbRef.push();
+        newBugRef.set({
+            title: title,
+            status: status,
+            severity: severity,
+            description: description,
+            createdBy: 'Colin',
+            createdDate: Date.now()
+        }).catch(function (err) { return console.error(err); });
+    };
     BugService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [firebase_config_service_1.FirebaseConfigService])

@@ -9,7 +9,7 @@ import { Bug } from '../model/bug';
 export class BugService {
   private bugsDbRef = this.fire.database.ref('/bugs');
 
-  constructor(private fire: FirebaseConfigService) {}
+  constructor(private fire: FirebaseConfigService) { }
 
   getAddedBugs(): Observable<any> {
     return Observable.create(obs => {
@@ -22,5 +22,19 @@ export class BugService {
         err => obs.error(err)
       );
     });
+  }
+
+  addBug(
+    { title, status, severity, description }: Bug
+  ): void {
+    const newBugRef = this.bugsDbRef.push();
+    newBugRef.set({
+      title,
+      status,
+      severity,
+      description,
+      createdBy: 'Colin',
+      createdDate: Date.now()
+    }).catch(err => console.error(err));
   }
 }
