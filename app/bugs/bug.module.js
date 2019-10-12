@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 // Modules
 var core_1 = require('@angular/core');
+var forms_1 = require('@angular/forms');
 var shared_module_1 = require('../shared/shared.module');
 var bug_routing_module_1 = require('./bug-routing.module');
 // Component
@@ -24,7 +25,8 @@ var BugModule = (function () {
         core_1.NgModule({
             imports: [
                 shared_module_1.SharedModule,
-                bug_routing_module_1.BugRoutingModule
+                bug_routing_module_1.BugRoutingModule,
+                forms_1.ReactiveFormsModule
             ],
             declarations: [
                 bug_list_component_1.BugListComponent,
