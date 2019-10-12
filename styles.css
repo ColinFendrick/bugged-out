@@ -11,8 +11,43 @@ h1 {
   border-color: #a09474;
 }
 
-.btn-success:hover,
-.btn-success:disabled {
+.btn.btn-success:hover,
+.btn.btn-success:disabled,
+.btn.btn-success:active,
+.btn.btn-success:focus {
   background-color: #aca286;
   border-color: #aca286;
+  outline: 0;  
+}
+
+.btn-xl {
+  padding: 1.2rem 3rem;
+}
+
+.btn.btn-primary {
+  background-color: #34434b;
+  border-color: #34434b;
+}
+
+.btn.btn-primary:hover,
+.btn.btn-primary:disabled {
+  background-color: #3f515a;
+  border-color: #3f515a;
+}
+
+.form-control {
+  border-radius: 0;
+  font-weight: lighter;
+}
+
+select {
+  text-transform: uppercase;
+  border: none !important;
+  height: 3.5rem !important;
+  -webkit-appearance: none;
+}
+
+textarea {
+  background-color: #f7f7f7 !important;
+  resize: none;
 }
