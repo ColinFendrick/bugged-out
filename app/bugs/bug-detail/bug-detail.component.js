@@ -13,18 +13,19 @@ var forms_1 = require('@angular/forms');
 var forbidden_string_validator_1 = require('../../shared/validation/forbidden-string.validator');
 var constants_1 = require('../constants/constants');
 var BugDetailComponent = (function () {
-    function BugDetailComponent() {
+    function BugDetailComponent(formB) {
+        this.formB = formB;
         this.modalId = "bugModal";
     }
     BugDetailComponent.prototype.ngOnInit = function () {
         this.configureForm();
     };
     BugDetailComponent.prototype.configureForm = function () {
-        this.bugForm = new forms_1.FormGroup({
-            title: new forms_1.FormControl(null, [forms_1.Validators.required, forbidden_string_validator_1.forbiddenStringValidator(constants_1.FORBIDDEN_STRINGS)]),
-            status: new forms_1.FormControl(1, forms_1.Validators.required),
-            severity: new forms_1.FormControl(1, forms_1.Validators.required),
-            description: new forms_1.FormControl(null, forms_1.Validators.required)
+        this.bugForm = this.formB.group({
+            title: [null, [forms_1.Validators.required, forbidden_string_validator_1.forbiddenStringValidator(constants_1.FORBIDDEN_STRINGS)]],
+            status: [1, forms_1.Validators.required],
+            severity: [1, forms_1.Validators.required],
+            description: [null, forms_1.Validators.required]
         });
     };
     BugDetailComponent.prototype.submitForm = function () {
@@ -37,7 +38,7 @@ var BugDetailComponent = (function () {
             templateUrl: 'bug-detail.component.html',
             styleUrls: ['bug-detail.component.css']
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [forms_1.FormBuilder])
     ], BugDetailComponent);
     return BugDetailComponent;
 }());
