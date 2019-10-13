@@ -14,14 +14,23 @@ var bug_service_1 = require('../service/bug.service');
 var bug_1 = require('../model/bug');
 var forbidden_string_validator_1 = require('../../shared/validation/forbidden-string.validator');
 var constants_1 = require('../constant/constants');
+var constants_2 = require('../../shared/constant/constants');
 var BugDetailComponent = (function () {
     function BugDetailComponent(formB, bugService) {
         this.formB = formB;
         this.bugService = bugService;
         this.modalId = "bugModal";
+        this.statuses = constants_2.STATUS;
+        this.statusArr = [];
+        this.severities = constants_2.SEVERITY;
+        this.severityArr = [];
         this.currentBug = new bug_1.Bug();
     }
     BugDetailComponent.prototype.ngOnInit = function () {
+        // We only want the keys that are numbers, not the strings --
+        // this is a consequence of how js cmpiles enums
+        this.statusArr = Object.keys(this.statuses).filter(Number);
+        this.severityArr = Object.keys(this.severities).filter(Number);
         this.configureForm();
     };
     BugDetailComponent.prototype.configureForm = function (bug) {
@@ -62,7 +71,7 @@ var BugDetailComponent = (function () {
         this.freshForm();
     };
     BugDetailComponent.prototype.freshForm = function () {
-        this.bugForm.reset({ status: 1, severity: 1 });
+        this.bugForm.reset({ status: this.statuses.Logged, severity: this.severities.Severe });
         this.cleanBug();
     };
     BugDetailComponent.prototype.cleanBug = function () {

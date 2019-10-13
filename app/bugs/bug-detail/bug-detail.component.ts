@@ -6,6 +6,7 @@ import { Bug } from '../model/bug';
 
 import { forbiddenStringValidator } from '../../shared/validation/forbidden-string.validator';
 import { FORBIDDEN_STRINGS } from '../constant/constants';
+import { STATUS, SEVERITY } from '../../shared/constant/constants';
 
 @Component({
   moduleId: module.id,
@@ -16,11 +17,19 @@ import { FORBIDDEN_STRINGS } from '../constant/constants';
 export class BugDetailComponent implements OnInit {
   private modalId = "bugModal";
   private bugForm: FormGroup;
+  private statuses = STATUS;
+  private statusArr: string[] = [];
+  private severities = SEVERITY;
+  private severityArr: string[] = [];
   @Input() currentBug = new Bug();
 
   constructor(private formB: FormBuilder, private bugService: BugService) { }
 
   ngOnInit(): void {
+    // We only want the keys that are numbers, not the strings --
+    // this is a consequence of how js cmpiles enums
+    this.statusArr = Object.keys(this.statuses).filter(Number);
+    this.severityArr = Object.keys(this.severities).filter(Number);
     this.configureForm();
   }
 
@@ -77,7 +86,7 @@ export class BugDetailComponent implements OnInit {
   }
 
   freshForm() {
-    this.bugForm.reset({ status: 1, severity: 1 });
+    this.bugForm.reset({ status: this.statuses.Logged, severity: this.severities.Severe });
     this.cleanBug();
   }
 
