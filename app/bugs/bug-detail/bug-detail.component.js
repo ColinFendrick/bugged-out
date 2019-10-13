@@ -75,10 +75,6 @@ var BugDetailComponent = (function () {
     BugDetailComponent.prototype.cleanBug = function () {
         this.currentBug = new bug_1.Bug();
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BugDetailComponent.prototype, "currentBug", void 0);
     BugDetailComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

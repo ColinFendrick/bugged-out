@@ -16,6 +16,10 @@ td {
   border-bottom: 0.5px solid rgba(52,67,75,0.1);
 }
 
+tbody > tr {
+  cursor: pointer;
+}
+
 i {
   padding-right: 0.5rem;
 }

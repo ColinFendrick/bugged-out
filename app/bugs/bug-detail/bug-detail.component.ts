@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 import { BugService } from '../service/bug.service';
@@ -21,7 +21,7 @@ export class BugDetailComponent implements OnInit {
   private statusArr: string[] = [];
   private severities = SEVERITY;
   private severityArr: string[] = [];
-  @Input() currentBug = new Bug();
+  private currentBug = new Bug();
 
   constructor(private formB: FormBuilder, private bugService: BugService) { }
 

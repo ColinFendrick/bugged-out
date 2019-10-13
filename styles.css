@@ -6,34 +6,46 @@ h1 {
   border-radius: 0;
 }
 
-.btn-success {
+.btn-success,
+.btn.btn-success:active,
+.btn.btn-success:active:focus {
   background-color: #a09474;
   border-color: #a09474;
 }
 
 .btn.btn-success:hover,
+.btn.btn-success:focus,
 .btn.btn-success:disabled,
-.btn.btn-success:active,
-.btn.btn-success:focus {
+.btn.btn-success:hover:disabled {
   background-color: #aca286;
   border-color: #aca286;
-  outline: 0;  
 }
 
 .btn-xl {
   padding: 1.2rem 3rem;
 }
 
-.btn.btn-primary {
+.btn.btn-primary,
+.btn.btn-primary:active,
+.btn.btn-primary:active:focus {
   background-color: #34434b;
   border-color: #34434b;
 }
 
 .btn.btn-primary:hover,
-.btn.btn-primary:disabled {
+.btn.btn-primary:disabled,
+.btn.btn-primary:focus,
+.btn.btn-primary:disabled:hover {
   background-color: #3f515a;
   border-color: #3f515a;
 }
+
+.btn:focus,
+.btn:active,
+.btn:focus:active {
+  outline: 0;
+}
+
 
 .form-control {
   border-radius: 0;
