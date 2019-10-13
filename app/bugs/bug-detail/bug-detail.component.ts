@@ -5,7 +5,7 @@ import { BugService } from '../service/bug.service';
 import { Bug } from '../model/bug';
 
 import { forbiddenStringValidator } from '../../shared/validation/forbidden-string.validator';
-import { FORBIDDEN_STRINGS } from '../constants/constants';
+import { FORBIDDEN_STRINGS } from '../constant/constants';
 
 @Component({
   moduleId: module.id,

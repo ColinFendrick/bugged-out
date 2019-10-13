@@ -13,7 +13,7 @@ var forms_1 = require('@angular/forms');
 var bug_service_1 = require('../service/bug.service');
 var bug_1 = require('../model/bug');
 var forbidden_string_validator_1 = require('../../shared/validation/forbidden-string.validator');
-var constants_1 = require('../constants/constants');
+var constants_1 = require('../constant/constants');
 var BugDetailComponent = (function () {
     function BugDetailComponent(formB, bugService) {
         this.formB = formB;
