@@ -26,6 +26,16 @@ var BugService = (function () {
             }, function (err) { return obs.error(err); });
         });
     };
+    BugService.prototype.changedListener = function () {
+        var _this = this;
+        return Observable_1.Observable.create(function (obs) {
+            _this.bugsDbRef.on('child_changed', function (bug) {
+                var updatedBug = bug.val();
+                updatedBug.id = bug.key;
+                obs.next(updatedBug);
+            }, function (err) { return obs.error(err); });
+        });
+    };
     BugService.prototype.addBug = function (_a) {
         var title = _a.title, status = _a.status, severity = _a.severity, description = _a.description;
         var newBugRef = this.bugsDbRef.push();

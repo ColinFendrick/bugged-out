@@ -13,13 +13,23 @@ export class BugService {
 
   getAddedBugs(): Observable<any> {
     return Observable.create(obs => {
-      this.bugsDbRef.on(
-        'child_added',
-        bug => {
-          const newBug = bug.val() as Bug;
-          newBug.id = bug.key;
-          obs.next(newBug);
-        },
+      this.bugsDbRef.on('child_added', bug => {
+        const newBug = bug.val() as Bug;
+        newBug.id = bug.key;
+        obs.next(newBug);
+      },
+        err => obs.error(err)
+      );
+    });
+  }
+
+  changedListener(): Observable<any> {
+    return Observable.create(obs => {
+      this.bugsDbRef.on('child_changed', bug => {
+        const updatedBug = bug.val() as Bug;
+        updatedBug.id = bug.key;
+        obs.next(updatedBug);
+      },
         err => obs.error(err)
       );
     });

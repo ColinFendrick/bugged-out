@@ -12,17 +12,29 @@ import { Bug } from '../model/bug';
 export class BugListComponent implements OnInit {
   private bugs: Bug[] = [];
 
-  constructor(private bugService: BugService) {}
+  constructor(private bugService: BugService) { }
 
-  ngOnInit():void {
+  ngOnInit(): void {
     this.getAddedBugs();
+    this.getUpdatedBugs();
   }
 
-  getAddedBugs():void {
+  getAddedBugs(): void {
     this.bugService.getAddedBugs()
       .subscribe(
         bug => this.bugs.push(bug),
         err => console.error('Unable to get added bug: ', err)
+      );
+  }
+
+  getUpdatedBugs(): void {
+    this.bugService.changedListener()
+      .subscribe(
+        bug => {
+          const bugIndex = this.bugs.findIndex(({ id }) => id === bug.id);
+          this.bugs[bugIndex] = bug;
+        },
+        err => console.error('Unable to get updated bug - ', err)
       );
   }
 }
