@@ -24,17 +24,22 @@ var BugDetailComponent = (function () {
     BugDetailComponent.prototype.ngOnInit = function () {
         this.configureForm();
     };
-    BugDetailComponent.prototype.configureForm = function () {
+    BugDetailComponent.prototype.configureForm = function (bug) {
+        // If a bug is sent in from the html, use that bug
+        if (bug) {
+            this.currentBug = bug;
+        }
+        var _a = this.currentBug, title = _a.title, status = _a.status, severity = _a.severity, description = _a.description;
         this.bugForm = this.formB.group({
-            title: [null, [forms_1.Validators.required, forbidden_string_validator_1.forbiddenStringValidator(constants_1.FORBIDDEN_STRINGS)]],
-            status: [1, forms_1.Validators.required],
-            severity: [1, forms_1.Validators.required],
-            description: [null, forms_1.Validators.required]
+            title: [title, [forms_1.Validators.required, forbidden_string_validator_1.forbiddenStringValidator(constants_1.FORBIDDEN_STRINGS)]],
+            status: [status, forms_1.Validators.required],
+            severity: [severity, forms_1.Validators.required],
+            description: [description, forms_1.Validators.required]
         });
     };
     BugDetailComponent.prototype.submitForm = function () {
         this.addBug();
-        this.bugForm.reset({ status: 1, severity: 1 });
+        this.freshForm();
     };
     BugDetailComponent.prototype.addBug = function () {
         this.currentBug.title = this.bugForm.value['title'];
@@ -42,6 +47,13 @@ var BugDetailComponent = (function () {
         this.currentBug.severity = this.bugForm.value['severity'];
         this.currentBug.description = this.bugForm.value['severity'];
         this.bugService.addBug(this.currentBug);
+    };
+    BugDetailComponent.prototype.freshForm = function () {
+        this.bugForm.reset({ status: 1, severity: 1 });
+        this.cleanBug();
+    };
+    BugDetailComponent.prototype.cleanBug = function () {
+        this.currentBug = new bug_1.Bug();
     };
     __decorate([
         core_1.Input(), 

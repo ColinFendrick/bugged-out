@@ -24,18 +24,24 @@ export class BugDetailComponent implements OnInit {
     this.configureForm();
   }
 
-  configureForm(): void {
+  configureForm(bug?: Bug): void {
+    // If a bug is sent in from the html, use that bug
+    if (bug) {
+      this.currentBug = bug;
+    }
+
+    const { title, status, severity, description } = this.currentBug;
     this.bugForm = this.formB.group({
-      title: [null, [Validators.required, forbiddenStringValidator(FORBIDDEN_STRINGS)]],
-      status: [1, Validators.required],
-      severity: [1, Validators.required],
-      description: [null, Validators.required]
+      title: [title, [Validators.required, forbiddenStringValidator(FORBIDDEN_STRINGS)]],
+      status: [status, Validators.required],
+      severity: [severity, Validators.required],
+      description: [description, Validators.required]
     });
   }
 
   submitForm(): void {
     this.addBug();
-    this.bugForm.reset({ status: 1, severity: 1 });
+    this.freshForm();
   }
 
   addBug(): void {
@@ -44,5 +50,14 @@ export class BugDetailComponent implements OnInit {
     this.currentBug.severity = this.bugForm.value['severity'];
     this.currentBug.description = this.bugForm.value['severity'];
     this.bugService.addBug(this.currentBug);
+  }
+
+  freshForm() {
+    this.bugForm.reset({ status: 1, severity: 1 });
+    this.cleanBug();
+  }
+
+  cleanBug() {
+    this.currentBug = new Bug();
   }
 }
