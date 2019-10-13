@@ -17,6 +17,7 @@ export class BugService {
         'child_added',
         bug => {
           const newBug = bug.val() as Bug;
+          newBug.id = bug.key;
           obs.next(newBug);
         },
         err => obs.error(err)
@@ -36,5 +37,14 @@ export class BugService {
       createdBy: 'Colin',
       createdDate: Date.now()
     }).catch(err => console.error(err));
+  }
+
+  updateBug(bug: Bug): void {
+    const currentBugRef = this.bugsDbRef.child(bug.id);
+    // Don't push the id back to firebase
+    bug.id = null;
+    bug.updatedBy = 'Tom';
+    bug.updatedDate = Date.now();
+    currentBugRef.update(bug).catch(err => console.error(err));
   }
 }

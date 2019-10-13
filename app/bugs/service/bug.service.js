@@ -21,6 +21,7 @@ var BugService = (function () {
         return Observable_1.Observable.create(function (obs) {
             _this.bugsDbRef.on('child_added', function (bug) {
                 var newBug = bug.val();
+                newBug.id = bug.key;
                 obs.next(newBug);
             }, function (err) { return obs.error(err); });
         });
@@ -36,6 +37,14 @@ var BugService = (function () {
             createdBy: 'Colin',
             createdDate: Date.now()
         }).catch(function (err) { return console.error(err); });
+    };
+    BugService.prototype.updateBug = function (bug) {
+        var currentBugRef = this.bugsDbRef.child(bug.id);
+        // Don't push the id back to firebase
+        bug.id = null;
+        bug.updatedBy = 'Tom';
+        bug.updatedDate = Date.now();
+        currentBugRef.update(bug).catch(function (err) { return console.error(err); });
     };
     BugService = __decorate([
         core_1.Injectable(), 

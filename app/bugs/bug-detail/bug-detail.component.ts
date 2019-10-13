@@ -27,7 +27,18 @@ export class BugDetailComponent implements OnInit {
   configureForm(bug?: Bug): void {
     // If a bug is sent in from the html, use that bug
     if (bug) {
-      this.currentBug = bug;
+      // Use a new instance so we are not coupled to our local data
+      this.currentBug = new Bug(
+        bug.id,
+        bug.title,
+        bug.status,
+        bug.severity,
+        bug.description,
+        bug.createdBy,
+        bug.createdDate,
+        bug.updatedBy,
+        bug.updatedDate
+      );
     }
 
     const { title, status, severity, description } = this.currentBug;
@@ -40,16 +51,24 @@ export class BugDetailComponent implements OnInit {
   }
 
   submitForm(): void {
-    this.addBug();
-    this.freshForm();
-  }
-
-  addBug(): void {
     this.currentBug.title = this.bugForm.value['title'];
     this.currentBug.status = this.bugForm.value['status'];
     this.currentBug.severity = this.bugForm.value['severity'];
     this.currentBug.description = this.bugForm.value['severity'];
+    if (this.currentBug.id) {
+      this.updateBug();
+    } else {
+      this.addBug();
+    }
+    this.freshForm();
+  }
+
+  addBug(): void {
     this.bugService.addBug(this.currentBug);
+  }
+
+  updateBug(): void {
+    this.bugService.updateBug(this.currentBug);
   }
 
   freshForm() {

@@ -27,7 +27,8 @@ var BugDetailComponent = (function () {
     BugDetailComponent.prototype.configureForm = function (bug) {
         // If a bug is sent in from the html, use that bug
         if (bug) {
-            this.currentBug = bug;
+            // Use a new instance so we are not coupled to our local data
+            this.currentBug = new bug_1.Bug(bug.id, bug.title, bug.status, bug.severity, bug.description, bug.createdBy, bug.createdDate, bug.updatedBy, bug.updatedDate);
         }
         var _a = this.currentBug, title = _a.title, status = _a.status, severity = _a.severity, description = _a.description;
         this.bugForm = this.formB.group({
@@ -38,15 +39,23 @@ var BugDetailComponent = (function () {
         });
     };
     BugDetailComponent.prototype.submitForm = function () {
-        this.addBug();
-        this.freshForm();
-    };
-    BugDetailComponent.prototype.addBug = function () {
         this.currentBug.title = this.bugForm.value['title'];
         this.currentBug.status = this.bugForm.value['status'];
         this.currentBug.severity = this.bugForm.value['severity'];
         this.currentBug.description = this.bugForm.value['severity'];
+        if (this.currentBug.id) {
+            this.updateBug();
+        }
+        else {
+            this.addBug();
+        }
+        this.freshForm();
+    };
+    BugDetailComponent.prototype.addBug = function () {
         this.bugService.addBug(this.currentBug);
+    };
+    BugDetailComponent.prototype.updateBug = function () {
+        this.bugService.updateBug(this.currentBug);
     };
     BugDetailComponent.prototype.freshForm = function () {
         this.bugForm.reset({ status: 1, severity: 1 });
