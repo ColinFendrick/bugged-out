@@ -58,7 +58,6 @@ var BugDetailComponent = (function () {
         else {
             this.addBug();
         }
-        this.freshForm();
     };
     BugDetailComponent.prototype.addBug = function () {
         this.bugService.addBug(this.currentBug);
@@ -68,7 +67,6 @@ var BugDetailComponent = (function () {
     };
     BugDetailComponent.prototype.removeBug = function () {
         this.bugService.removeBug(this.currentBug);
-        this.freshForm();
     };
     BugDetailComponent.prototype.freshForm = function () {
         this.bugForm.reset({ status: this.statuses.Logged, severity: this.severities.Severe });

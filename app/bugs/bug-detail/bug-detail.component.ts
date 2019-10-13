@@ -69,7 +69,6 @@ export class BugDetailComponent implements OnInit {
     } else {
       this.addBug();
     }
-    this.freshForm();
   }
 
   addBug(): void {
@@ -82,7 +81,6 @@ export class BugDetailComponent implements OnInit {
 
   removeBug(): void {
     this.bugService.removeBug(this.currentBug);
-    this.freshForm();
   }
 
   freshForm() {
