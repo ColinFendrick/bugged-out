@@ -54,7 +54,7 @@ export class BugDetailComponent implements OnInit {
     this.currentBug.title = this.bugForm.value['title'];
     this.currentBug.status = this.bugForm.value['status'];
     this.currentBug.severity = this.bugForm.value['severity'];
-    this.currentBug.description = this.bugForm.value['severity'];
+    this.currentBug.description = this.bugForm.value['description'];
     if (this.currentBug.id) {
       this.updateBug();
     } else {
@@ -69,6 +69,11 @@ export class BugDetailComponent implements OnInit {
 
   updateBug(): void {
     this.bugService.updateBug(this.currentBug);
+  }
+
+  removeBug(): void {
+    this.bugService.removeBug(this.currentBug);
+    this.freshForm();
   }
 
   freshForm() {

@@ -42,7 +42,7 @@ var BugDetailComponent = (function () {
         this.currentBug.title = this.bugForm.value['title'];
         this.currentBug.status = this.bugForm.value['status'];
         this.currentBug.severity = this.bugForm.value['severity'];
-        this.currentBug.description = this.bugForm.value['severity'];
+        this.currentBug.description = this.bugForm.value['description'];
         if (this.currentBug.id) {
             this.updateBug();
         }
@@ -56,6 +56,10 @@ var BugDetailComponent = (function () {
     };
     BugDetailComponent.prototype.updateBug = function () {
         this.bugService.updateBug(this.currentBug);
+    };
+    BugDetailComponent.prototype.removeBug = function () {
+        this.bugService.removeBug(this.currentBug);
+        this.freshForm();
     };
     BugDetailComponent.prototype.freshForm = function () {
         this.bugForm.reset({ status: 1, severity: 1 });

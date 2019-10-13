@@ -36,6 +36,16 @@ var BugService = (function () {
             }, function (err) { return obs.error(err); });
         });
     };
+    BugService.prototype.removedListener = function () {
+        var _this = this;
+        return Observable_1.Observable.create(function (obs) {
+            _this.bugsDbRef.on('child_removed', function (bug) {
+                var removedBug = bug.val();
+                removedBug.id = bug.key;
+                obs.next(removedBug);
+            }, function (err) { return obs.error(err); });
+        });
+    };
     BugService.prototype.addBug = function (_a) {
         var title = _a.title, status = _a.status, severity = _a.severity, description = _a.description;
         var newBugRef = this.bugsDbRef.push();
@@ -50,11 +60,16 @@ var BugService = (function () {
     };
     BugService.prototype.updateBug = function (bug) {
         var currentBugRef = this.bugsDbRef.child(bug.id);
+        console.log(bug.description);
         // Don't push the id back to firebase
         bug.id = null;
         bug.updatedBy = 'Tom';
         bug.updatedDate = Date.now();
         currentBugRef.update(bug).catch(function (err) { return console.error(err); });
+    };
+    BugService.prototype.removeBug = function (bug) {
+        var toDeleteRef = this.bugsDbRef.child(bug.id);
+        toDeleteRef.remove().catch(function (err) { return console.error(err); });
     };
     BugService = __decorate([
         core_1.Injectable(), 

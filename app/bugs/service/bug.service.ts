@@ -35,6 +35,18 @@ export class BugService {
     });
   }
 
+  removedListener(): Observable<any> {
+    return Observable.create(obs => {
+      this.bugsDbRef.on('child_removed', bug => {
+        const removedBug = bug.val() as Bug;
+        removedBug.id = bug.key;
+        obs.next(removedBug);
+      },
+        err => obs.error(err)
+      );
+    });
+  }
+
   addBug(
     { title, status, severity, description }: Bug
   ): void {
@@ -51,10 +63,16 @@ export class BugService {
 
   updateBug(bug: Bug): void {
     const currentBugRef = this.bugsDbRef.child(bug.id);
+    console.log(bug.description)
     // Don't push the id back to firebase
     bug.id = null;
     bug.updatedBy = 'Tom';
     bug.updatedDate = Date.now();
     currentBugRef.update(bug).catch(err => console.error(err));
+  }
+
+  removeBug(bug: Bug): void {
+    const toDeleteRef = this.bugsDbRef.child(bug.id);
+    toDeleteRef.remove().catch(err => console.error(err));
   }
 }
